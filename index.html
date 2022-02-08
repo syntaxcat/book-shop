@@ -9,17 +9,24 @@
 </head>
 
 <body onload="onInit()">
-    <h1>Welcome to my bookshop!📚</h1>
-    <button class="create" onclick="openFormAddBook()">Create new book</button>
+    <h1 data-trans="title">Welcome to my bookshop!📚</h1>
+    <button data-trans="create" class="create" onclick="openFormAddBook()">Create new book</button>
+
+    <header>
+        <select onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+        </select>
+    </header>
 
     <div class="books-container">
         <table class="books-table" cellpadding="30">
 			<thead>
 				<tr>
-					<th class="id-th">id</th>
-					<th class="name-th" onclick="onSort('name')">name</th>
-					<th class="price-th" onclick="onSort('price')">price</th>
-                    <th colspan="3">actions</th>
+					<th  data-trans="id" class="id-th">id</th>
+					<th data-trans="name" class="name-th" onclick="onSort('name')">name</th>
+					<th data-trans="price" class="price-th" onclick="onSort('price')">price</th>
+                    <th data-trans="actions" colspan="3">actions</th>
 				</tr>
 			</thead>
 			<tbody class="book-table"></tbody>			
@@ -36,13 +43,13 @@
             <button onclick="onCloseModalCreate()" class="close">&times;</button>
             <div class="content">
                 <form class="add-book" onsubmit="onAddBook(event)">
-                    <label for="name">Name of the book?</label>
-                    <input type="text" id="name" name="name" placeholder="Name">
-                    <label for="price">Price of the book?</label>
-                    <input type="text" id="price" name="price" placeholder="Price">
-                    <label for="imgUrl">imgUrl of the book?</label>
-                    <input type="text" id="imgUrl" name="imgUrl" placeholder="imgUrl">
-                <button>Add</button>
+                    <label data-trans="name-of-book" for="name">Name of the book?</label>
+                    <input data-trans="name-book-placeholder" type="text" id="name" name="name" placeholder="Name">
+                    <label data-trans="price-of-book" for="price">Price of the book?</label>
+                    <input data-trans="price-book-placeholder" type="text" id="price" name="price" placeholder="Price">
+                    <label data-trans="imgurl-of-book" for="imgUrl">imgUrl of the book?</label>
+                    <input data-trans="imgurl-placeholder" type="text" id="imgUrl" name="imgUrl" placeholder="imgUrl">
+                <button data-trans="add-btn">Add</button>
                </form>
             </div>
         </div>
@@ -52,20 +59,21 @@
             <button onclick="onCloseModalUpdate()" class="close">&times;</button>
             <div class="content">
                 <form class="update-book" onsubmit="onUpdateBook(event)">
-                    <label for="newPrice">New price</label>
-                    <input type="text" id="newPrice" name="newPrice" placeholder="New price">
-                    <button>Update</button>
+                    <label data-trans="newprice-of-book" for="newPrice">New price</label>
+                    <input data-trans="newprice-of-book-placeholder" type="text" id="newPrice" name="newPrice" placeholder="New price">
+                    <button data-trans="update-btn">Update</button>
                    </form>
             </div>
         </div>
     </div>
     <div class="pagination">
-        <button onclick="onMoveToPage(-1)">Prev</button>
+        <button data-trans="prev" onclick="onMoveToPage(-1)">Prev</button>
         <div class="pages">
 
         </div>
-        <button onclick="onMoveToPage(1)">Next</button>
+        <button data-trans="next" onclick="onMoveToPage(1)">Next</button>
     </div>
+    <script src="js/services/i18n-service.js"></script>
     <script src="js/services/storage.service.js"></script>
     <script src="js/services/util.service.js"></script>
     <script src="js/services/book.service.js"></script>

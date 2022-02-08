@@ -6,6 +6,7 @@ let bookIdToUpdate;
 function onInit() {
 	renderPagination();
 	renderBooks();
+	doTrans();
 }
 
 function renderBooks() {
@@ -16,9 +17,9 @@ function renderBooks() {
 				<td>${book.id}</td>
 				<td>${book.name}</td>
 				<td>${book.price}</td>
-                <td><button class="btn read-btn" onclick="onReadBook('${book.id}')">Read</button></td>
-                <td><button class="btn update-btn" onclick="openFormUpdateBook('${book.id}')">Update</button></td>
-                <td><button class="btn delete-btn" onclick="onDeleteBook('${book.id}')">Delete</button></td>
+                <td><button data-trans="read-btn-trans" class="btn read-btn" onclick="onReadBook('${book.id}')">Read</button></td>
+                <td><button data-trans="update-btn-trans" class="btn update-btn" onclick="openFormUpdateBook('${book.id}')">Update</button></td>
+                <td><button data-trans="delete-btn-trans" class="btn delete-btn" onclick="onDeleteBook('${book.id}')">Delete</button></td>
 			</tr>`
 	);
 
@@ -127,7 +128,6 @@ function onSort(sortBy) {
 
 function renderPagination() {
 	const pages = getBooksPagination().pages;
-	console.log(pages);
 	let strHTML = '';
 	for (var i = 1; i <= pages; i++) {
 		strHTML += `<button onclick="onPickPage(${i})">${i}</button>`;
@@ -144,4 +144,12 @@ function onPickPage(pageNum) {
 function onMoveToPage(diff) {
 	changePage(diff);
 	renderBooks();
+}
+
+function onSetLang(lang) {
+	setLang(lang);
+	if (lang === 'he') document.body.classList.add('rtl');
+	else document.body.classList.remove('rtl');
+	doTrans();
+	// renderBooks();
 }
